@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from pseudo_prime_counter import PseudoPrimeCounter, is_prime
-kk
-def cpnPrimalityTest(n):
+def cpn_primality_test(n):
     a = 2
     b = 6
     for _ in range(n-2):
@@ -13,9 +12,9 @@ def cpnPrimalityTest(n):
 
 def smallest_lucas_type_pseudo_prime(c0, c1):
     for n in range(2, 1000):
-        if not is_prime(n) and lucasTypePrimalityTest(n, c0, c1):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1):
             return n
-def lucasTypePrimalityTest(n, c0, c1):
+def lucas_type_primality_test(n, c0, c1):
     a = 2
     b = c1
     for _ in range(n - 1):
@@ -25,21 +24,23 @@ def lucasTypePrimalityTest(n, c0, c1):
     # Check if number passes the cpn Primality test
     return (b - c1) % n == 0
 #list_of_spp=[smallest_lucas_type_pseudo_prime(1, c1) for c1 in range (2,10)]
+
 list_of_spp=[[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,5)] for c1 in range (2,10) ]
 print( list_of_spp)
+
 plt.imshow(list_of_spp)
 plt.colorbar()
 plt.show()
 for c1 in range (2,10):
     print(smallest_lucas_type_pseudo_prime(1, c1))
 
-counter = PseudoPrimeCounter(cpnPrimalityTest,"Companion Pell Number Primality Test",2)
+counter = PseudoPrimeCounter(cpn_primality_test,"Companion Pell Number Primality Test",2)
 counter.count_pseudo_primes()
 counter.plot_graph()
 counter.print_pseudo_primes()
 
 
-counter2 = PseudoPrimeCounter(lambda n: lucasTypePrimalityTest(n, 1,2 ),"lucasTypePrimalityTest ",2)
+counter2 = PseudoPrimeCounter(lambda n: lucas_type_primality_test(n,1,2),"lucasTypePrimalityTest ",2)
 counter2.count_pseudo_primes()
 counter2.plot_graph()
 counter2.print_pseudo_primes()
