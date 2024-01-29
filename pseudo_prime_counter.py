@@ -11,6 +11,16 @@ def is_prime(n):  # trial division
         d += 2
     return True
 
+def is_3_smooth(n):
+    return remove_factors_2_and_3(n) == 1
+
+def remove_factors_2_and_3(n):
+    while n%2 == 0:
+        n=n//2
+    while n%3 == 0:
+        n=n//3
+    return n
+
 class PseudoPrimeCounter:
 
     limit = default_limit
@@ -31,6 +41,8 @@ class PseudoPrimeCounter:
     def print_pseudo_primes(self):
         print(f"\nAll pseudo primes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
         print(f"\nNumber of pseudo primes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
+        l =[n for n in self.list_of_pseudo_prime if is_3_smooth(n)]
+        print(f"\nAll pseudo primes that are 3_is_smooth {self.primality_test_name}: {l}")
 
     def plot_graph(self, x_interval=100):
         x_values = range(2, 2 + len(self.accumulated_pseudo_prime_values))
