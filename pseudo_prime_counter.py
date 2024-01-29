@@ -42,7 +42,7 @@ class PseudoPrimeCounter:
         print(f"\nAll pseudo primes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
         print(f"\nNumber of pseudo primes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
         l =[n for n in self.list_of_pseudo_prime if is_3_smooth(n)]
-        print(f"\nAll pseudo primes that are 3_is_smooth {self.primality_test_name}: {l}")
+        print(f"\nAll pseudo primes that are 3_is_smooth of {self.primality_test_name}: {l}")
 
     def plot_graph(self, x_interval=100):
         x_values = range(2, 2 + len(self.accumulated_pseudo_prime_values))

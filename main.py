@@ -55,6 +55,32 @@ def remove_factors_2_and_3(n):
     while n%3 == 0:
         n=n//3
     return n
+
+def plot_combined_graph_from_tests(*primality_tests):
+    counters = []
+    for primality_test, test_name in primality_tests:
+        counter = PseudoPrimeCounter(primality_test, test_name)
+        counter.count_pseudo_primes()
+        counters.append(counter)
+
+
+    for counter in counters:
+        x_values = range(2, 2 + len(counter.accumulated_pseudo_prime_values))
+        plt.plot(x_values, counter.accumulated_pseudo_prime_values, marker='o', label=counter.primality_test_name)
+
+    plt.title('Number of Pseudo Primes vs Numerical Value Comparison')
+    plt.xlabel('Numerical Value')
+    plt.ylabel('Number of Pseudo Primes')
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+
+plot_combined_graph_from_tests(
+    (cpn_primality_test, "cpn"),
+    (lambda n: lucas_type_primality_test(n,5,2), "lucas"),
+
+)
+
 def generate_pseudo_prime_heatmap(c0_range, c1_range):
     list_of_spp = [[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in c0_range] for c1 in c1_range]
     sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=c0_range, yticklabels=c1_range)
@@ -78,20 +104,28 @@ c0_range = range(2,10)
 c1_range = range(2,10)
 #generate_pseudo_prime_heatmap_up_to(c0_range, c1_range)
 
+
 list_of_3_smooth = [n for n in range(1, 100) if is_3_smooth(n)]
-print(list_of_3_smooth)
+print(f"\nList of 3 smooth numbers: {list_of_3_smooth}")
 
-list_of_spp=[[log_of_smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,20)] for c1 in range (2,49) ]
-print( list_of_spp)
 
-plt.imshow(list_of_spp)
+
+list_of_spp=[[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,5)] for c1 in range (2,10) ]
+print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
+
+list_of_log_spp=[[log_of_smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,100)] for c1 in range (2,100) ]
+plt.imshow(list_of_log_spp)
 plt.colorbar()
+plt.title('Logs of Smallest Lucas-Type Pseudo Prime')
+plt.xlabel('Parameter c0')
+plt.ylabel('Parameter c1')
 plt.show()
 
 
-analyze_primality_test(cpn_primality_test, "cpn primality test")
 
-analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "lucas_type_primality_test")
+analyze_primality_test(cpn_primality_test, "CPN Primality Test")
+
+analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")
 
 """
 def is_prime(n):#trial division
