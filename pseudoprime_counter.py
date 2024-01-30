@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-default_limit = 1000
+default_limit = 3000
 def is_prime(n):  # trial division
     if n < 2 or n % 2 == 0:
         return n == 2
@@ -21,7 +21,7 @@ def remove_factors_2_and_3(n):
         n=n//3
     return n
 
-class PseudoPrimeCounter:
+class PseudoprimeCounter:
 
     limit = default_limit
 
@@ -39,17 +39,17 @@ class PseudoPrimeCounter:
             self.accumulated_pseudo_prime_values.append(len(self.list_of_pseudo_prime))
 
     def print_pseudo_primes(self):
-        print(f"\nAll pseudo primes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
-        print(f"\nNumber of pseudo primes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
+        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
+        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
         l =[n for n in self.list_of_pseudo_prime if is_3_smooth(n)]
         print(f"\nAll pseudo primes that are 3_is_smooth of {self.primality_test_name}: {l}")
 
     def plot_graph(self, x_interval=100):
         x_values = range(2, 2 + len(self.accumulated_pseudo_prime_values))
         plt.plot(x_values, self.accumulated_pseudo_prime_values, marker='o')
-        plt.title('Cumulative Number of Pseudo Primes vs Numerical Sequence of ' + self.primality_test_name,fontdict={'fontsize': 8})
+        plt.title('Cumulative Number of Pseudoprimes vs Numerical Sequence of ' + self.primality_test_name,fontdict={'fontsize': 8})
         plt.xlabel('Number in Numerical Sequence')
-        plt.ylabel('Cumulative Number of Pseudo Primes')
+        plt.ylabel('Cumulative Number of Pseudoprimes')
         plt.grid(True)
         plt.xticks(range(0, 2 + len(self.accumulated_pseudo_prime_values), x_interval))
         plt.show(block=True)

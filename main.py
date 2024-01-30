@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 from math import log
-from pseudo_prime_counter import PseudoPrimeCounter, is_prime
+from pseudoprime_counter import PseudoprimeCounter, is_prime
 
 def analyze_primality_test(primality_test, primality_test_name):
-    counter = PseudoPrimeCounter(primality_test, primality_test_name)
+    counter = PseudoprimeCounter(primality_test, primality_test_name)
     counter.count_pseudo_primes()
     counter.plot_graph()
     counter.print_pseudo_primes()
@@ -63,7 +63,6 @@ def plot_combined_graph_from_tests(*primality_tests):
         counter.count_pseudo_primes()
         counters.append(counter)
 
-
     for counter in counters:
         x_values = range(2, 2 + len(counter.accumulated_pseudo_prime_values))
         plt.plot(x_values, counter.accumulated_pseudo_prime_values, marker='o', label=counter.primality_test_name)
@@ -74,58 +73,63 @@ def plot_combined_graph_from_tests(*primality_tests):
     plt.grid(True)
     plt.legend()
     plt.show()
-
+'''
 plot_combined_graph_from_tests(
-    (cpn_primality_test, "cpn"),
-    (lambda n: lucas_type_primality_test(n,5,2), "lucas"),
-
+    (cpn_primality_test, "Companion Pell Number"),
+    (lambda n: lucas_type_primality_test(n,5,2), "Lucas-Type Sequence (5,2)"),
 )
+'''
 
 def generate_pseudo_prime_heatmap(c0_range, c1_range):
     list_of_spp = [[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in c0_range] for c1 in c1_range]
     sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=c0_range, yticklabels=c1_range)
-    plt.title('Smallest Pseudo Prime Heatmap of Lucas-type sequence')
+    plt.title('Smallest Pseudoprime Heatmap of Lucas-type sequence')
     plt.xlabel('Parameter c0')
     plt.ylabel('Parameter c1')
     plt.show()
 
-c0_range = range(90,100)
-c1_range = range(90,100)
-generate_pseudo_prime_heatmap(c0_range, c1_range)
+c0_range = range(41,51)
+c1_range = range(41,51)
+#generate_pseudo_prime_heatmap(c0_range, c1_range)
 
 def generate_pseudo_prime_heatmap_up_to(c0_range, c1_range):
     list_of_spp = [[smallest_lucas_type_pseudo_prime_up_to(c0, c1) for c0 in c0_range] for c1 in c1_range]
     sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=c0_range, yticklabels=c1_range)
-    plt.title('Numbers of Pseudo Prime Heatmap of Lucas-type sequence up to')
+    plt.title('Numbers of Pseudoprime Heatmap of Lucas-type sequence up to 1000', fontdict={'fontsize': 10})
     plt.xlabel('Parameter c0')
     plt.ylabel('Parameter c1')
     plt.show()
-c0_range = range(2,10)
-c1_range = range(2,10)
+
 #generate_pseudo_prime_heatmap_up_to(c0_range, c1_range)
 
 
 list_of_3_smooth = [n for n in range(1, 100) if is_3_smooth(n)]
-print(f"\nList of 3 smooth numbers: {list_of_3_smooth}")
+#print(f"\nList of 3 smooth numbers: {list_of_3_smooth}")
 
 
 
-list_of_spp=[[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,5)] for c1 in range (2,10) ]
-print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
+list_of_spp=[[smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,51)] for c1 in range (2,51) ]
+plt.imshow(list_of_spp)
+plt.colorbar()
+plt.title('Numbers of Lucas-Type Pseudo prime up to 1000')
+plt.xlabel('Parameter c0')
+plt.ylabel('Parameter c1')
+#plt.show()
+#print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
 
-list_of_log_spp=[[log_of_smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,100)] for c1 in range (2,100) ]
+list_of_log_spp=[[log_of_smallest_lucas_type_pseudo_prime(c0, c1) for c0 in range(2,51)] for c1 in range (2,51) ]
 plt.imshow(list_of_log_spp)
 plt.colorbar()
-plt.title('Logs of Smallest Lucas-Type Pseudo Prime')
+plt.title('Logs of Smallest Lucas-Type Pseudoprime')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
 plt.show()
 
 
 
-analyze_primality_test(cpn_primality_test, "CPN Primality Test")
+#analyze_primality_test(cpn_primality_test, "CPN Primality Test")
 
-analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")
+#analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")
 
 """
 def is_prime(n):#trial division
