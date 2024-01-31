@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from pseudoprime_counter import is_prime
-from main import cpn_primality_test, plot_combined_graph_from_tests
+from main import cpn_primality_test,plot_combined_graph_from_tests
+
 
 default_limit = 1000
 
@@ -15,10 +16,13 @@ def is_k_pseudoprime(n,k):
     return is_k_rough(n) and not is_prime(n)
 
 def primality_test_with_rough_pseudoprimes(primality_test, k):
-    for _ in range(2, default_limit + 1):
+    results = []
+    for n in range(2, default_limit + 1):
         if primality_test(n) and is_k_pseudoprime(n, k):
-            return n
-    return None
+            results.append(n)
+    return results
+
+
 class RoughPseudoprimeCounter:
     limit = 1000
 
@@ -39,7 +43,9 @@ class RoughPseudoprimeCounter:
         print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
         print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")
 
-cpn_with_rough_3 = primality_test_with_rough_pseudoprimes(cpn_primality_test, 3)
+def cpn_with_rough_3(n):
+    if cpn_primality_test(n) and is_k_pseudoprime(n, 3):
+        return n
 
 plot_combined_graph_from_tests(
     (cpn_primality_test, "Companion Pell Number"),
