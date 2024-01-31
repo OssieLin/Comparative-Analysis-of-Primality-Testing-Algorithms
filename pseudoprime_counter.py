@@ -27,46 +27,41 @@ class PseudoprimeCounter:
 
     def __init__(self, primality_test, primality_test_name):
         self.primality_test = primality_test
-        self.list_of_pseudo_prime = []
-        self.accumulated_pseudo_prime_values = []
+        self.list_of_pseudoprime = []
+        self.accumulated_pseudoprime_values = []
         self.primality_test_name = primality_test_name
 
-    def count_pseudo_primes(self):
+    def count_pseudoprimes(self):
         for n in range(2, self.limit + 1):
             if self.primality_test(n):
                 if not is_prime(n):
-                    self.list_of_pseudo_prime.append(n)
-            self.accumulated_pseudo_prime_values.append(len(self.list_of_pseudo_prime))
+                    self.list_of_pseudoprime.append(n)
+            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
 
-    def print_pseudo_primes(self):
-        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
-        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
-        l =[n for n in self.list_of_pseudo_prime if is_3_smooth(n)]
-        print(f"\nAll pseudo primes that are 3_is_smooth of {self.primality_test_name}: {l}")
+    def print_pseudoprimes(self):
+        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
+        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")
+        l = [n for n in self.list_of_pseudoprime if is_3_smooth(n)]
+        print(f"\nAll pseudoprimes that are 3_is_smooth of {self.primality_test_name}: {l}")
 
     def plot_graph(self, x_interval=100):
-        x_values = range(2, 2 + len(self.accumulated_pseudo_prime_values))
-        plt.plot(x_values, self.accumulated_pseudo_prime_values, marker='o')
-        plt.title('Cumulative Number of Pseudoprimes vs Numerical Sequence of ' + self.primality_test_name,fontdict={'fontsize': 8})
+        x_values = range(2, 2 + len(self.accumulated_pseudoprime_values))
+        plt.plot(x_values, self.accumulated_pseudoprime_values, marker='o')
+        plt.title('Cumulative Number of Pseudoprimes vs Numerical Sequence of ' + self.primality_test_name, fontdict={'fontsize': 8})
         plt.xlabel('Number in Numerical Sequence')
-        plt.ylabel('Cumulative Number of Pseudoprimes')
-        plt.grid(True)
-        plt.xticks(range(0, 2 + len(self.accumulated_pseudo_prime_values), x_interval))
-        plt.show(block=True)
-
 
 
 #I'm trying to adjust the pseudo_prime test according to different primality test, but i'm not sure how to make the sequence right
 """
     def is_prime(self):
         return n == 2 or pow(2, n - 1, n) == 1
-    def count_pseudo_primes(self):
+    def count_pseudoprimes(self):
         for n in range(self.sequence_length, self.limit + 1):
             if self.primality_test(n):
                 if not self.is_prime(n):
-                    self.list_of_pseudo_prime.append(n)
-            self.accumulated_pseudo_prime_values.append(len(self.list_of_pseudo_prime))
+                    self.list_of_pseudoprime.append(n)
+            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
     def print_pseudo_primes(self):
-        print(f"\nAll pseudo primes of {self.primality_test_name}: {self.list_of_pseudo_prime}")
-        print(f"\nNumber of pseudo primes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudo_prime)}")
+        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
+        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")
 """
