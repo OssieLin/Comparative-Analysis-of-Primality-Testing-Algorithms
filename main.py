@@ -1,13 +1,8 @@
-import matplotlib.pyplot as plt
-import seaborn as sns
-from math import log
-from pseudoprime_counter import *
 from graph import *
-from util import *
 from primality_test import *
 
 def analyze_primality_test(primality_test, primality_test_name,k ):
-    counter = PseudoprimeCounter(primality_test, primality_test_name)
+    counter = PseudoprimeCounter(primality_test, primality_test_name, k)
     counter.count_pseudoprimes(k)
     counter.plot_graph()
     counter.print_pseudoprimes()
@@ -15,10 +10,10 @@ def analyze_primality_test(primality_test, primality_test_name,k ):
 
 
 
-plot_combined_graph_from_tests(
-    (cpn_primality_test, "Companion Pell Number"),
-    (lambda n: lucas_type_primality_test(n,5,2), "Lucas-Type Sequence (5,2)"),
-)
+plot_combined_graph_from_tests([
+    (cpn_primality_test, "Companion Pell Number", 1),
+    (cpn_primality_test, "cpn rough 3", 2)
+])
 
 
 

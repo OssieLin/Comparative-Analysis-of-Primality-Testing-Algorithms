@@ -14,19 +14,14 @@ class PseudoprimeCounter:
         self.primality_test_name = primality_test_name
         self.k=k
 
-    def count_pseudoprimes(self):
+    def count_pseudoprimes(self, k):
         for n in range(2, self.limit + 1):
-            if self.primality_test(n):
+            if self.primality_test(n) and is_k_rough(n, k):
                 if not is_prime(n):
                     self.list_of_pseudoprime.append(n)
             self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
 
-    def count_k_rough_pseudoprimes(self, k):
-        for n in range(2, self.limit + 1):
-            if self.primality_test(n) and is_k_rough(k):
-                if not is_prime(n):
-                    self.list_of_pseudoprime.append(n)
-            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
+
     def print_pseudoprimes(self):
         print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
         print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")

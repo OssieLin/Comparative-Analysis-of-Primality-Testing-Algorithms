@@ -1,13 +1,12 @@
 import seaborn as sns
-from math import log
 import matplotlib.pyplot as plt
-from pseudoprime_counter import *
+from pseudoprime_counter import PseudoprimeCounter
 
-def plot_combined_graph_from_tests(*primality_tests):
+def plot_combined_graph_from_tests(primality_tests):
     counters = []
-    for primality_test, test_name in primality_tests:
-        counter = PseudoprimeCounter(primality_test, test_name)
-        counter.count_pseudoprimes()
+    for primality_test, test_name, k in primality_tests:
+        counter = PseudoprimeCounter(primality_test, test_name,k)
+        counter.count_pseudoprimes(k)
         counters.append(counter)
 
     for counter in counters:

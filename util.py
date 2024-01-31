@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-from main import cpn_primality_test,plot_combined_graph_from_tests
 
 
 default_limit = 1000
