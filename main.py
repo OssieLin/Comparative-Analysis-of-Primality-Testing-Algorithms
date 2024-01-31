@@ -76,13 +76,13 @@ def plot_combined_graph_from_tests(*primality_tests):
     plt.legend()
     plt.show()
 
-'''
+
 plot_combined_graph_from_tests(
     (cpn_primality_test, "Companion Pell Number"),
     (lambda n: lucas_type_primality_test(n,5,2), "Lucas-Type Sequence (5,2)"),
 )
 
-'''
+
 
 
 c0_range = range(41,51)
@@ -187,4 +187,4 @@ plt.grid(True)
 plt.xticks(x)
 plt.show()
 """
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
