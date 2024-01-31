@@ -1,25 +1,21 @@
 from graph import *
+from primality_test import smallest_lucas_type_pseudoprime
 from primality_test import *
-
-def analyze_primality_test(primality_test, primality_test_name,k ):
-    counter = PseudoprimeCounter(primality_test, primality_test_name, k)
-    counter.count_pseudoprimes(k)
-    counter.plot_graph()
-    counter.print_pseudoprimes()
-
-
 
 
 plot_combined_graph_from_tests([
     (cpn_primality_test, "Companion Pell Number", 1),
     (cpn_primality_test, "cpn rough 3", 2)
 ])
+plot_combined_graph_from_tests([
+    (cpn_primality_test, "Companion Pell Number", 1),
+    (lambda n: lucas_type_primality_test(n, 5, 2), "lt", 2)
+])
 
 
 
-
-c0_range = range(41,51)
-c1_range = range(41,51)
+c0_range = range(2,11)
+c1_range = range(2,11)
 
 
 #generate_pseudoprime_heatmap(c0_range, c1_range)
@@ -30,16 +26,17 @@ c1_range = range(41,51)
 
 list_of_3_smooth = [n for n in range(1, 100) if is_3_smooth(n)]
 
+print("Hallo")
+print(smallest_lucas_type_pseudoprime(5,2,100))
 
-
-list_of_spp=[[smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(2,51)] for c1 in range (2,51) ]
+list_of_spp=[[smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20,51)] for c1 in range (-20,51) ]
 plt.imshow(list_of_spp)
 plt.colorbar()
 plt.title('Numbers of Lucas-Type Pseudoprimes up to 1000')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
-#plt.show()
-#print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
+plt.show()
+print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
 
 
 list_of_log_spp=[[log_of_smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(2,51)] for c1 in range (2,51) ]
@@ -48,12 +45,14 @@ plt.colorbar()
 plt.title('Logs of Smallest Lucas-Type Pseudoprimes')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
-#plt.show()
+plt.show()
+
+list_of_fermat_spp=[]
 
 
 analyze_primality_test(cpn_primality_test, "CPN Primality Test", 1)
-analyze_primality_test(cpn_primality_test, "CPN Primality Test", 3)
-
+analyze_primality_test(cpn_primality_test, "CPN Primality Test k=3", 3)
+analyze_primality_test(lambda n: lucas_type_primality_test(n, -9,6), "fermat 3", 2)
 
 
 #analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")

@@ -1,13 +1,9 @@
-
-
-default_limit = 1000
-
 # A k rough number is a positive integer whose prime factors are all greater than or equal to k.
 def is_k_rough(n,k):
     for i in range(2, k+1):
         if n % i == 0:
-            return True
-    return False
+            return False
+    return True
 
 def is_k_pseudoprime(n,k):
     return is_k_rough(n) and not is_prime(n)
@@ -39,7 +35,8 @@ def remove_factors_2_and_3(n):
         n=n//3
     return n
 
-
+#def test_pseudoprimes():
+ #   if
 
 
 '''

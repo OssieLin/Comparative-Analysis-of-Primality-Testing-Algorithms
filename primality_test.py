@@ -3,7 +3,7 @@ from pseudoprime_counter import *
 from util import *
 
 def analyze_primality_test(primality_test, primality_test_name,k ):
-    counter = PseudoprimeCounter(primality_test, primality_test_name)
+    counter = PseudoprimeCounter(primality_test, primality_test_name,k)
     counter.count_pseudoprimes(k)
     counter.plot_graph()
     counter.print_pseudoprimes()
@@ -18,11 +18,13 @@ def cpn_primality_test(n):
     # Check if number passes the cpn Primality test
     return (b-2) % n == 0
 
-def smallest_lucas_type_pseudoprime(c0, c1):
-    for n in range(2, 1000):
+
+
+def smallest_lucas_type_pseudoprime(c0, c1, max=1000):
+    for n in range(2, max):
         if not is_prime(n) and lucas_type_primality_test(n, c0, c1):
             return n
-    return 1000
+    return max
 
 def log_of_smallest_lucas_type_pseudoprime(c0, c1):
     for n in range(2, 1000):
@@ -46,3 +48,8 @@ def lucas_type_primality_test(n, c0, c1):
         b = c
     # Check if number passes the cpn Primality test
     return (b - c1) % n == 0
+
+def fermat_primality_test(n, c):#fermat's little theorem
+    return pow(c, n - 1, n) == 1
+
+print(fermat_primality_test(3, 66))

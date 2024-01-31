@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from util import *
 
-default_limit = 3000
+default_limit = 1000
 
 class PseudoprimeCounter:
 

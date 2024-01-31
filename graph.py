@@ -1,6 +1,7 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pseudoprime_counter import PseudoprimeCounter
+from primality_test import *
 
 def plot_combined_graph_from_tests(primality_tests):
     counters = []
