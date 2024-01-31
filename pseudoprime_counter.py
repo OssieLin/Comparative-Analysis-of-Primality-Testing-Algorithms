@@ -1,35 +1,18 @@
 import matplotlib.pyplot as plt
+from util import *
 
 default_limit = 3000
-def is_prime(n):  # trial division
-    if n < 2 or n % 2 == 0:
-        return n == 2
-    d = 3
-    while d * d <= n:
-        if n % d == 0:
-            return False
-        d += 2
-    return True
-
-def is_3_smooth(n):
-    return remove_factors_2_and_3(n) == 1
-
-def remove_factors_2_and_3(n):
-    while n%2 == 0:
-        n=n//2
-    while n%3 == 0:
-        n=n//3
-    return n
 
 class PseudoprimeCounter:
 
     limit = default_limit
 
-    def __init__(self, primality_test, primality_test_name):
+    def __init__(self, primality_test, primality_test_name, k):
         self.primality_test = primality_test
         self.list_of_pseudoprime = []
         self.accumulated_pseudoprime_values = []
         self.primality_test_name = primality_test_name
+        self.k=k
 
     def count_pseudoprimes(self):
         for n in range(2, self.limit + 1):
@@ -38,6 +21,12 @@ class PseudoprimeCounter:
                     self.list_of_pseudoprime.append(n)
             self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
 
+    def count_k_rough_pseudoprimes(self, k):
+        for n in range(2, self.limit + 1):
+            if self.primality_test(n) and is_k_rough(k):
+                if not is_prime(n):
+                    self.list_of_pseudoprime.append(n)
+            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
     def print_pseudoprimes(self):
         print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
         print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")

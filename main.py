@@ -1,80 +1,18 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 from math import log
-from pseudoprime_counter import PseudoprimeCounter, is_prime
+from pseudoprime_counter import *
+from graph import *
+from util import *
+from primality_test import *
 
-def analyze_primality_test(primality_test, primality_test_name):
+def analyze_primality_test(primality_test, primality_test_name,k ):
     counter = PseudoprimeCounter(primality_test, primality_test_name)
-    counter.count_pseudoprimes()
+    counter.count_pseudoprimes(k)
     counter.plot_graph()
     counter.print_pseudoprimes()
 
-def cpn_primality_test(n):
-    a = 2
-    b = 6
-    for _ in range(n-2):
-        c = (2*b + a) % n
-        a = b
-        b = c
-    # Check if number passes the cpn Primality test
-    return (b-2) % n == 0
 
-def smallest_lucas_type_pseudoprime(c0, c1):
-    for n in range(2, 1000):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1):
-            return n
-    return 1000
-
-def log_of_smallest_lucas_type_pseudoprime(c0, c1):
-    for n in range(2, 1000):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1):
-            return log(n)
-    return log(1000)
-
-def smallest_lucas_type_pseudoprime_up_to(c0, c1):
-    counter = 0
-    for n in range(2, 1000):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) :
-            counter += 1
-    return counter
-
-def lucas_type_primality_test(n, c0, c1):
-    a = 2
-    b = c1
-    for _ in range(n - 1):
-        c = (c1 * b + c0 * a) % n
-        a = b
-        b = c
-    # Check if number passes the cpn Primality test
-    return (b - c1) % n == 0
-
-def is_3_smooth(n):
-    return remove_factors_2_and_3(n) == 1
-
-def remove_factors_2_and_3(n):
-    while n%2 == 0:
-        n=n//2
-    while n%3 == 0:
-        n=n//3
-    return n
-
-def plot_combined_graph_from_tests(*primality_tests):
-    counters = []
-    for primality_test, test_name in primality_tests:
-        counter = PseudoprimeCounter(primality_test, test_name)
-        counter.count_pseudoprimes()
-        counters.append(counter)
-
-    for counter in counters:
-        x_values = range(2, 2 + len(counter.accumulated_pseudoprime_values))
-        plt.plot(x_values, counter.accumulated_pseudoprime_values, marker='o', label=counter.primality_test_name)
-
-    plt.title('Number of Pseudoprimes vs Numerical Value Comparison')
-    plt.xlabel('Numerical Value')
-    plt.ylabel('Number of Pseudoprimes')
-    plt.grid(True)
-    plt.legend()
-    plt.show()
 
 
 plot_combined_graph_from_tests(
@@ -87,23 +25,11 @@ plot_combined_graph_from_tests(
 
 c0_range = range(41,51)
 c1_range = range(41,51)
-def generate_pseudoprime_heatmap(c0_range, c1_range):
-    list_of_spp = [[smallest_lucas_type_pseudoprime(c0, c1) for c0 in c0_range] for c1 in c1_range]
-    sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=c0_range, yticklabels=c1_range)
-    plt.title('Smallest Pseudoprimes Heatmap of Lucas-Type Sequence')
-    plt.xlabel('Parameter c0')
-    plt.ylabel('Parameter c1')
-    plt.show()
+
 
 #generate_pseudoprime_heatmap(c0_range, c1_range)
 
-def generate_pseudoprime_heatmap_up_to(c0_range, c1_range):
-    list_of_spp = [[smallest_lucas_type_pseudoprime_up_to(c0, c1) for c0 in c0_range] for c1 in c1_range]
-    sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=c0_range, yticklabels=c1_range)
-    plt.title('Numbers of Pseudoprimes Heatmap of Lucas-Type Sequence up to 1000', fontdict={'fontsize': 10})
-    plt.xlabel('Parameter c0')
-    plt.ylabel('Parameter c1')
-    plt.show()
+
 
 #generate_pseudoprime_heatmap_up_to(c0_range, c1_range)
 
@@ -130,9 +56,10 @@ plt.ylabel('Parameter c1')
 #plt.show()
 
 
+analyze_primality_test(cpn_primality_test, "CPN Primality Test", 1)
+analyze_primality_test(cpn_primality_test, "CPN Primality Test", 3)
 
 
-#analyze_primality_test(cpn_primality_test, "CPN Primality Test")
 
 #analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")
 

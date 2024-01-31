@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from pseudoprime_counter import is_prime
 from main import cpn_primality_test,plot_combined_graph_from_tests
 
 
@@ -22,7 +21,30 @@ def primality_test_with_rough_pseudoprimes(primality_test, k):
             results.append(n)
     return results
 
+def is_prime(n):  # trial division
+    if n < 2 or n % 2 == 0:
+        return n == 2
+    d = 3
+    while d * d <= n:
+        if n % d == 0:
+            return False
+        d += 2
+    return True
 
+def is_3_smooth(n):
+    return remove_factors_2_and_3(n) == 1
+
+def remove_factors_2_and_3(n):
+    while n%2 == 0:
+        n=n//2
+    while n%3 == 0:
+        n=n//3
+    return n
+
+
+
+
+'''
 class RoughPseudoprimeCounter:
     limit = 1000
 
@@ -35,7 +57,7 @@ class RoughPseudoprimeCounter:
 
     def count_rough_pseudoprimes(self, k):
         for n in range(2, self.limit + 1):
-            if self.primality_test(n) and is_k_pseudoprime(n, self.k):
+            if self.primality_test(n) and is_k_rough(n, self.k):
                 self.list_of_pseudoprime.append(n)
             self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
 
@@ -51,3 +73,4 @@ plot_combined_graph_from_tests(
     (cpn_primality_test, "Companion Pell Number"),
     (cpn_with_rough_3, "CPN with rough 3"),
 )
+'''
