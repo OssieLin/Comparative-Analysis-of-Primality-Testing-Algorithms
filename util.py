@@ -1,3 +1,5 @@
+default_limit = 1000
+
 # A k rough number is a positive integer whose prime factors are all greater than or equal to k.
 def is_k_rough(n,k):
     for i in range(2, k+1):
