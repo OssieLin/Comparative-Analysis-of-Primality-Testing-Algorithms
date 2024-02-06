@@ -28,9 +28,8 @@ def miller_rabin(n, k=40):
 
 def gen_prime(bits):
     while True:
-        # Guarantees it's a odd
+        # Guarantees it's an odd number
         a = (die.randrange(1 << bits -1, 1 << bits) << 1) +1 # << 1 equals to multiplying by two
         if miller_rabin(a):
             return a
 
-gen_prime(10)

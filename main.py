@@ -41,13 +41,13 @@ plt.show()
 #print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
 
 
-list_of_log_spp=[[log_of_smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(2,51)] for c1 in range (2,51) ]
-plt.imshow(list_of_log_spp)
+list_of_log_spp=[[log_of_smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20,51)] for c1 in range (-20,51) ]
+plt.imshow(list_of_log_spp, extent=(-20, 51, -20, 51))
 plt.colorbar()
 plt.title('Logs of Smallest Lucas-Type Pseudoprimes')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
-#plt.show()
+plt.show()
 
 
 #analyze_primality_test(cpn_primality_test, "CPN Primality Test", 1)
