@@ -1,6 +1,10 @@
 from graph import *
 from primality_test import *
+from miller_rabin_test import *
 
+print (gen_prime(10))
+print(miller_rabin(97))
+print(fermat_primality_test(3, 66))
 '''
 plot_combined_graph_from_tests([
     (cpn_primality_test, "Companion Pell Number", 1),

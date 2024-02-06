@@ -52,4 +52,4 @@ def lucas_type_primality_test(n, c0, c1):
 def fermat_primality_test(n, c):#fermat's little theorem
     return pow(c, n - 1, n) == 1
 
-print(fermat_primality_test(3, 66))
+
