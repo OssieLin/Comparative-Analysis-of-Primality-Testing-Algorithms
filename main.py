@@ -5,18 +5,21 @@ from miller_rabin_test import *
 print (gen_prime(10))
 print(miller_rabin(97))
 print(fermat_primality_test(3, 66))
+
+#plot_heatmap_lucastype_nrpseudoprimes(3, 10, 2, 10, 1, 1000)
+
 '''
 plot_combined_graph_from_tests([
     (cpn_primality_test, "Companion Pell Number", 1),
     (cpn_primality_test, "CPN with rough 43", 43)
 ])
-
+'''
 
 plot_combined_graph_from_tests([
     (lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Sequence(5,2)", 1),
     (lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Sequence(5,2) with rough 2", 2)
 ])
-'''
+
 
 c0_range = range(2,11)
 c1_range = range(2,11)
@@ -28,9 +31,18 @@ generate_pseudoprime_heatmap(c0_range, c1_range)
 list_of_3_smooth = [n for n in range(1, 100) if is_3_smooth(n)]
 
 
-list_of_spp = [[smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20, 51)] for c1 in range(-20, 51)]
 
-# Convert the list to a numpy array
+
+n_values = list(range(1, 11))  # Adjust the range as needed
+
+# Compute c0 and c1 values for the Fermat case
+c0_values = [-n**2 for n in n_values]
+c1_values = [2 * n for n in n_values]
+
+# Plot the "curve" representing the Fermat case
+plt.plot(c0_values, c1_values, marker='o', linestyle='-', color='red', label='Fermat Case')
+
+list_of_spp = [[smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20, 51)] for c1 in range(-20, 51)]
 plt.imshow(list_of_spp, extent=(-20, 51, -20, 51))  # Set the extent for x and y axes
 plt.colorbar()
 plt.title('Numbers of Lucas-Type Pseudoprimes up to 1000')
@@ -48,6 +60,8 @@ plt.title('Logs of Smallest Lucas-Type Pseudoprimes')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
 plt.show()
+
+
 
 
 #analyze_primality_test(cpn_primality_test, "CPN Primality Test", 1)

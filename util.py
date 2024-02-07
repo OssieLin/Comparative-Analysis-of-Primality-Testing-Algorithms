@@ -8,7 +8,7 @@ def is_k_rough(n,k):
     return True
 
 def is_k_pseudoprime(n,k):
-    return is_k_rough(n) and not is_prime(n)
+    return is_k_rough(n, k) and not is_prime(n)
 
 def primality_test_with_rough_pseudoprimes(primality_test, k):
     results = []
