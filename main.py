@@ -2,65 +2,57 @@ from graph import *
 from primality_test import *
 from miller_rabin_test import *
 
-print (gen_prime(10))
-print(miller_rabin(97))
-print(fermat_primality_test(3, 66))
+compare_primality_tests = [
+    (lambda n: lucas_type_primality_test(n, 8, 6), "Lucas-Type Sequence(8,6)", 1),
+    (lambda n: lucas_type_primality_test(n, 8, 6), "Lucas-Type Sequence(8,6) with 2-rough", 2),
+    (lambda n: lucas_type_primality_test(n, 8, 6), "Lucas-Type Sequence(8,6) with 3-rough", 3)
+]
+plot_combined_graph_from_tests(compare_primality_tests)
 
-#plot_heatmap_lucastype_nrpseudoprimes(3, 10, 2, 10, 1, 1000)
+c0_min = -40
+c0_max = 60
+c1_min = 0
+c1_max = 100
 
-'''
-plot_combined_graph_from_tests([
-    (cpn_primality_test, "Companion Pell Number", 1),
-    (cpn_primality_test, "CPN with rough 43", 43)
-])
-'''
-
-plot_combined_graph_from_tests([
-    (lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Sequence(5,2)", 1),
-    (lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Sequence(5,2) with rough 2", 2)
-])
-
-
-c0_range = range(2,11)
-c1_range = range(2,11)
-
-generate_pseudoprime_heatmap(c0_range, c1_range)
-
-#generate_pseudoprime_heatmap_up_to(c0_range, c1_range)
-
-list_of_3_smooth = [n for n in range(1, 100) if is_3_smooth(n)]
-
-
-
-
-n_values = list(range(1, 11))  # Adjust the range as needed
-
-# Compute c0 and c1 values for the Fermat case
+n_values = list(range(1, 50))
+# Fermat case
 c0_values = [-n**2 for n in n_values]
 c1_values = [2 * n for n in n_values]
 
-# Plot the "curve" representing the Fermat case
-plt.plot(c0_values, c1_values, marker='o', linestyle='-', color='red', label='Fermat Case')
+#plt.plot(c0_values, c1_values, marker='o', linestyle='-', color='red', label='Fermat Case')
 
-list_of_spp = [[smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20, 51)] for c1 in range(-20, 51)]
-plt.imshow(list_of_spp, extent=(-20, 51, -20, 51))  # Set the extent for x and y axes
+list_of_spp = [[log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, 3) for c0 in range(c0_min, c0_max)] for c1 in range(c1_min, c1_max)]
+plt.imshow(list_of_spp, extent=(c0_min, c0_max, c1_min, c1_max))
+colorbar = plt.colorbar()
+
+plt.title('Logs of Lucas-Type Pseudoprimes up to 10000 with 3-rough')
+plt.xlabel('Parameter c0')
+plt.ylabel('Parameter c1')
+plt.xticks(range(c0_min, c0_max+1, 20))
+plt.yticks(range(c1_min, c1_max+1, 20))
+plt.show()
+
+list_of_spp = [[log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, 2)for c0 in range(c0_min, c0_max)] for c1 in range(c1_min, c1_max)]
+plt.imshow(list_of_spp, extent=(c0_min, c0_max, c1_min, c1_max))  # Set the extent for x and y axes
+plt.colorbar()
+plt.title('Logs of Lucas-Type Pseudoprimes up to 10000 with 2-rough')
+plt.xlabel('Parameter c0')
+plt.ylabel('Parameter c1')
+plt.xticks(range(c0_min, c0_max+1, 20))
+plt.yticks(range(c1_min, c1_max+1, 20))
+plt.show()
+
+
+
+list_of_log_spp=[[log_of_smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(c0_min, c0_max)] for c1 in range(c1_min, c1_max)]
+plt.imshow(list_of_log_spp, extent=(c0_min, c0_max, c1_min, c1_max))  # Set the extent for x and y axes
 plt.colorbar()
 plt.title('Numbers of Lucas-Type Pseudoprimes up to 1000')
 plt.xlabel('Parameter c0')
 plt.ylabel('Parameter c1')
-plt.show()
-
-#print(f"\nList of smallest pseudo prime of Lucas-Type sequence: {list_of_spp}")
-
-
-list_of_log_spp=[[log_of_smallest_lucas_type_pseudoprime(c0, c1) for c0 in range(-20,51)] for c1 in range (-20,51) ]
-plt.imshow(list_of_log_spp, extent=(-20, 51, -20, 51))
-plt.colorbar()
-plt.title('Logs of Smallest Lucas-Type Pseudoprimes')
-plt.xlabel('Parameter c0')
-plt.ylabel('Parameter c1')
-plt.show()
-
+plt.xticks(range(c0_min, c0_max+1, 20))
+plt.yticks(range(c1_min, c1_max+1, 20))
+#plt.show()
 
 
 
@@ -69,57 +61,5 @@ plt.show()
 #analyze_primality_test(lambda n: lucas_type_primality_test(n, -9,6), "fermat 3", 2)
 
 
-#analyze_primality_test(lambda n: lucas_type_primality_test(n, 5, 2), "Lucas-Type Primality Test")
-
-"""
-def is_prime(n):#trial division
-    if n < 2 or n % 2 == 0:
-         return n == 2
-    d = 3
-    while d*d <= n:
-         if n % d == 0:
-             return False
-         d += 2
-    return True
-    
-    def dbzPrimalityTest(n):
-    a = 1
-    b = 3
-    c = 4
-    d = 11
-    e = 16
-    f = 30
-    g = 78
-    for _ in range(n-7):
-        h = (g+f+d+4*a)%n
-        a, b, c, d, e, f, g = b, c, d, e, f, g, h
-    return (g - 1) % n == 0
-    
-def fermat_is_prime(n):#fermat's little theorem
-    return n==2 or pow(2, n - 1, n) == 1
-
-listOfpseudoprime=[]
-accumulated_pseudo_prime_values = []
-
-for n in range(2, limit + 1):
-    if cpnPrimalityTest(n):
-        if not is_prime(n):
-            listOfpseudoprime.append(n)
-    accumulated_pseudo_prime_values.append(len(listOfpseudoprime))
-
-
-# Print the list of values
-print(f"\nAll pseudo primes: {listOfpseudoprime}")
-print(f"\nNumber of pseudo primes up to {limit}: {len(listOfpseudoprime)}")
-
-# Generate the graph
-x=range(2, limit+1)
-plt.plot(x, accumulated_pseudo_prime_values, marker='o')
-plt.title('Cumulative Number of Pseudo Primes vs Numerical Sequence')
-plt.xlabel('Number in Numerical Sequence')
-plt.ylabel('Cumulative Number of Pseudo Primes')
-plt.grid(True)
-plt.xticks(x)
-plt.show()
-"""
+analyze_primality_test(lambda n: lucas_type_primality_test(n, 1, 2), "Lucas-Type Primality Test",1)
 

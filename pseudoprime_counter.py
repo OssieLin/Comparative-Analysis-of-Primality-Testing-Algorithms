@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from util import *
 
-default_limit = 10000
+default_limit = 1000
 
 class PseudoprimeCounter:
 
@@ -35,7 +35,7 @@ class PseudoprimeCounter:
         plt.xlabel('Number in Numerical Sequence')
 
 
-#I'm trying to adjust the pseudo_prime test according to different primality test, but i'm not sure how to make the sequence right
+#I'm trying to adjust the pseudo_prime test according to different primality test, but i'm not sure how to make the sequence correct
 """
     def is_prime(self):
         return n == 2 or pow(2, n - 1, n) == 1

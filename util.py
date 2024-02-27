@@ -37,37 +37,3 @@ def remove_factors_2_and_3(n):
         n=n//3
     return n
 
-#def test_pseudoprimes():
- #   if
-
-
-'''
-class RoughPseudoprimeCounter:
-    limit = 1000
-
-    def __init__(self, primality_test, primality_test_name, k):
-        self.primality_test = primality_test
-        self.k = k
-        self.list_of_pseudoprime = []
-        self.accumulated_pseudoprime_values = []
-        self.primality_test_name = primality_test_name
-
-    def count_rough_pseudoprimes(self, k):
-        for n in range(2, self.limit + 1):
-            if self.primality_test(n) and is_k_rough(n, self.k):
-                self.list_of_pseudoprime.append(n)
-            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
-
-    def print_rough_pseudoprimes(self):
-        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
-        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")
-
-def cpn_with_rough_3(n):
-    if cpn_primality_test(n) and is_k_pseudoprime(n, 3):
-        return n
-
-plot_combined_graph_from_tests(
-    (cpn_primality_test, "Companion Pell Number"),
-    (cpn_with_rough_3, "CPN with rough 3"),
-)
-'''

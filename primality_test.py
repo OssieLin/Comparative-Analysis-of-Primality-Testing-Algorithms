@@ -15,7 +15,6 @@ def cpn_primality_test(n):
         c = (2*b + a) % n
         a = b
         b = c
-    # Check if number passes the cpn Primality test
     return (b-2) % n == 0
 
 
@@ -32,13 +31,6 @@ def log_of_smallest_lucas_type_pseudoprime(c0, c1):
             return log(n)
     return log(1000)
 
-def smallest_lucas_type_pseudoprime_up_to(c0, c1):
-    counter = 0
-    for n in range(2, 1000):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) :
-            counter += 1
-    return counter
-
 def lucas_type_primality_test(n, c0, c1):
     a = 2
     b = c1
@@ -46,10 +38,27 @@ def lucas_type_primality_test(n, c0, c1):
         c = (c1 * b + c0 * a) % n
         a = b
         b = c
-    # Check if number passes the cpn Primality test
     return (b - c1) % n == 0
 
 def fermat_primality_test(n, c):#fermat's little theorem
     return pow(c, n - 1, n) == 1
 
+def number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
+    counter = 0
+    for n in range(2, pp_max+1):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n, k_rough):
+            counter += 1
+    return counter
 
+def lucas_type_pseudoprime_up_to_counter(c0, c1):#for use of no k_rough
+    counter = 0
+    for n in range(2, 1000):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) :
+            counter += 1
+    return counter
+
+def log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, k_rough):
+    for n in range(2, 5000):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) is is_k_rough(n, k_rough):
+            return log(n)
+    return log(1000)
