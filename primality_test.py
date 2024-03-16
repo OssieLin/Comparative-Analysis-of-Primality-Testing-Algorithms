@@ -1,4 +1,5 @@
 from math import log
+from math import log10
 from pseudoprime_counter import *
 from util import *
 
@@ -50,6 +51,17 @@ def number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
             counter += 1
     return counter
 
+def log_of_number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
+    counter = 0
+    for n in range(2, pp_max+1):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n, k_rough):
+            counter += 1
+    if counter <= 0:
+        return float('nan')  # Return NaN if counter is not positive
+    else:
+        return log10(counter)
+
+
 def lucas_type_pseudoprime_up_to_counter(c0, c1):#for use of no k_rough
     counter = 0
     for n in range(2, 1000):
@@ -58,7 +70,7 @@ def lucas_type_pseudoprime_up_to_counter(c0, c1):#for use of no k_rough
     return counter
 
 def log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, k_rough):
-    for n in range(2, 5000):
+    for n in range(2, 10000):
         if not is_prime(n) and lucas_type_primality_test(n, c0, c1) is is_k_rough(n, k_rough):
-            return log(n)
-    return log(1000)
+            return log10(n)
+    return log(10000)
