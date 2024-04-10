@@ -2,9 +2,9 @@ from math import log10
 from pseudoprime_counter import *
 from util import *
 
-def analyze_primality_test(primality_test, primality_test_name,k ):
-    counter = PseudoprimeCounter(primality_test, primality_test_name,k)
-    counter.count_pseudoprimes(k)
+def analyze_primality_test(primality_test, primality_test_name,k_rough ):
+    counter = PseudoprimeCounter(primality_test, primality_test_name,k_rough)
+    counter.count_pseudoprimes(k_rough)
     counter.plot_graph()
     counter.print_pseudoprimes()
 
@@ -17,15 +17,6 @@ def cpn_primality_test(n):
         b = c
     return (b-2) % n == 0
 
-def binpow(base, exp, mod):
-    result = 1
-    base %= mod
-    while exp > 0:
-        if exp % 2 == 1:
-            result = (result * base) % mod
-        base = (base * base) % mod
-        exp //= 2
-    return result
 
 def lucas_type_primality_test(n, c0, c1):
     a = 2 # a = V0
@@ -36,28 +27,17 @@ def lucas_type_primality_test(n, c0, c1):
         b = c
     return (b-c1) % n == 0
 
-def smallest_lucas_type_pseudoprime(c0, c1, k, max=5000):
-    for n in range(2, max):
+def fermat_primality_test(n, c):#fermat's little theorem
+    return pow(c, n - 1, n) == 1
+
+def smallest_lucas_type_pseudoprime(c0, c1, k, pp_max):
+    for n in range(2, pp_max+1):
         if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n,k):
             return n
     return max
 
-def fermat_primality_test(n, c):#fermat's little theorem
-    return pow(c, n - 1, n) == 1
-
-
-def log_of_number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
-    counter = 0
+def log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, k_rough, pp_max):
     for n in range(2, pp_max+1):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n, k_rough):
-            counter += 1
-    if counter <= 0:
-        return float('nan')  # Return NaN if counter is not positive
-    else:
-        return log10(counter)
-
-def log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, k_rough):
-    for n in range(2, 100000):
         if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n, k_rough):
             return log10(n)
     return float('nan')
@@ -69,3 +49,12 @@ def number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
             counter += 1
     return counter
 
+def log_of_number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max):
+    counter = 0
+    for n in range(2, pp_max+1):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n, k_rough):
+            counter += 1
+    if counter <= 0:
+        return float('nan')
+    else:
+        return log10(counter)

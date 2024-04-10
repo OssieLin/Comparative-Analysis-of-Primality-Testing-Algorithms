@@ -35,17 +35,3 @@ class PseudoprimeCounter:
         plt.xlabel('Number in Numerical Sequence')
 
 
-#I'm trying to adjust the pseudo_prime test according to different primality test, but i'm not sure how to make the sequence correct
-"""
-    def is_prime(self):
-        return n == 2 or pow(2, n - 1, n) == 1
-    def count_pseudoprimes(self):
-        for n in range(self.sequence_length, self.limit + 1):
-            if self.primality_test(n):
-                if not self.is_prime(n):
-                    self.list_of_pseudoprime.append(n)
-            self.accumulated_pseudoprime_values.append(len(self.list_of_pseudoprime))
-    def print_pseudo_primes(self):
-        print(f"\nAll pseudoprimes of {self.primality_test_name}: {self.list_of_pseudoprime}")
-        print(f"\nNumber of pseudoprimes up to {self.limit} of {self.primality_test_name}: {len(self.list_of_pseudoprime)}")
-"""
