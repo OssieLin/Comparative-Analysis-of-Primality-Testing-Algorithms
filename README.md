@@ -7,7 +7,7 @@ Large random primes are constructed in practice by generating pseudorandom numbe
 These primality tests fail for certain numbers called **pseudoprimes**.\
 My research focuses on analyzing the class of Perrin-type primality tests- **Lucas-Type Sequence**: \
 \
-$$V_{n} = c_1 V_{1} + c_2 V_{2}, \quad V_{2} = 2, \quad V_{1} = c_1$$\
+$$V_{n+2} = c_1 V_{n+1} + c_0 V_{n}, \quad V_{2} = 2, \quad V_{1} = c_1$$\
 If p is prime, then we have the congruence $$V_{p}\equiv V_{1}(mod\quad p)$$
 \
 Dougherty-Bliss and Zeilberger looked at these recently. They find that certain recurrent sequences produce primality tests for which the smallest pseudoprime is very large.
