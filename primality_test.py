@@ -17,7 +17,6 @@ def cpn_primality_test(n):
         b = c
     return (b-2) % n == 0
 
-
 def lucas_type_primality_test(n, c0, c1):
     a = 2 # a = V0
     b = c1 # b = V1

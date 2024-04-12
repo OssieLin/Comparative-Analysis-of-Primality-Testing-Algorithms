@@ -21,9 +21,9 @@ def plot_combined_graph_from_tests(primality_tests):
     plt.legend()
     plt.show()
 
-
 def generate_spp_heatmap(c0_min, c0_max, c1_min, c1_max, k_rough, pp_max):
     list_of_spp = [[smallest_lucas_type_pseudoprime(c0, c1, k_rough, pp_max) for c0 in range(c0_min, c0_max)] for c1 in range(c1_min, c1_max)[::-1]]
+
     sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=range(c0_min, c0_max), yticklabels=range(c1_min, c1_max)[::-1])
     plt.title('Logs of Smallest 3-rough Pseudoprimes ', fontdict={'fontsize':13})
     plt.xlabel('Parameter c0')
@@ -32,6 +32,7 @@ def generate_spp_heatmap(c0_min, c0_max, c1_min, c1_max, k_rough, pp_max):
 
 def generate_npp_heatmap(c0_min, c0_max, c1_min, c1_max, k_rough, pp_max):
     list_of_spp = [[number_of_lucas_type_pseudoprime_up_to(c0, c1, k_rough, pp_max) for c0 in range(c0_min, c0_max)] for c1 in range(c1_min, c1_max)[::-1]]
+
     sns.heatmap(list_of_spp, cmap="YlGnBu", annot=True, fmt="d", xticklabels=range(c0_min, c0_max), yticklabels=range(c1_min, c1_max)[::-1])
     plt.title(f'Number of 3-rough Pseudoprimes up to 1000', fontdict={'fontsize': 13})
     plt.xlabel('Parameter c0')
