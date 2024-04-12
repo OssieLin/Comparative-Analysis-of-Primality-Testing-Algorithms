@@ -27,14 +27,14 @@ def lucas_type_primality_test(n, c0, c1):
         b = c
     return (b-c1) % n == 0
 
-def fermat_primality_test(n, c):#fermat's little theorem
+def fermat_primality_test(n, c):# fermat's little theorem
     return pow(c, n - 1, n) == 1
 
-def smallest_lucas_type_pseudoprime(c0, c1, k, pp_max):
+def smallest_lucas_type_pseudoprime(c0, c1, k_rough, pp_max):
     for n in range(2, pp_max+1):
-        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n,k):
+        if not is_prime(n) and lucas_type_primality_test(n, c0, c1) and is_k_rough(n,k_rough):
             return n
-    return max
+    return pp_max
 
 def log_of_smallest_lucas_type_pseudoprime_k_rough(c0, c1, k_rough, pp_max):
     for n in range(2, pp_max+1):

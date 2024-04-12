@@ -9,21 +9,24 @@ compare_primality_tests = [
 ]
 #plot_combined_graph_from_tests(compare_primality_tests)
 
-c0_min = -60
-c0_max = 41
-c1_min = 0
-c1_max = 101
+c0_min = 2
+c0_max = 11
+c1_min = 2
+c1_max = 11
+k_rough = 1
+pp_max = 1000 # max pseudoprimes
 
-#plot_heatmap_lucastype_nrpseudoprimes(c0_min, c0_max, c1_min, c1_max, 1, 1000)
+generate_spp_heatmap(c0_min, c0_max, c1_min, c1_max, k_rough, pp_max)
+generate_npp_heatmap(c0_min, c0_max, c1_min, c1_max, k_rough, pp_max)
 
-n_values = list(range(1, 50))
 # Fermat case
+n_values = list(range(1, 50))
 c0_values = [-n**2 for n in n_values]
 c1_values = [2 * n for n in n_values]
 
 plt.plot(c0_values, c1_values, marker='o', linestyle='-', color='red', label='Fermat Case')
 
-#plot_spp_largerscale(c0_min, c0_max, c1_min, c1_max, 1, 1000)
+plot_spp_largerscale(c0_min, c0_max, c1_min, c1_max, 1, 1000)
 
 
 #analyze_primality_test(lambda n: lucas_type_primality_test(n, 1, 2), "Lucas-Type Primality Test",1)
