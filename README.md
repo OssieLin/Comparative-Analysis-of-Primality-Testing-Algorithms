@@ -1,5 +1,4 @@
 # Comparative Analysis of Lucas-Type Sequence
-\
 Modern cryptography algorithms like RSA need primality tests to generate large random primes.\
 Specifically, RSA uses the product of two prime numbers to generate the public and private keys; if these primes are predictable, it makes it easier for an attacker to break the encryption scheme.\
 \
