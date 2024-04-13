@@ -14,6 +14,9 @@ $$V_{n+2} = c_1 V_{n+1} + c_0 V_{n}, \quad V_{0} = 2, \quad V_{1} = c_1$$
 
 If p is prime, then we have the congruence $$V_{p}\equiv V_{1}(mod\quad p)$$
 
+### Goal
+Understand prime numbers better and find ways to reduce number of pseudoprimes in probablistic primality tests.
+
 ### Method 
 Visualize the quality of primality tests through **the number of pseudoprimes up to N** and **the sizes of the smallest pseudoproimes**.
 Analyze the extreme cases that stand out from the visulizations and try to find patterns among them.
