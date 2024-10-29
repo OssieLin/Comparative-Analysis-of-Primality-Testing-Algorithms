@@ -5,7 +5,8 @@ Specifically, RSA uses the product of two prime numbers to generate the public a
 \
 Large random primes are constructed in practice by generating pseudorandom numbers and then doing a primality test such as the Fermat primality test or something more powerful such as the Miller–Rabin primality test.\
 These primality tests fail for certain numbers called **pseudoprimes**.\
-My research focuses on analyzing the class of Perrin-type primality tests- **Lucas-Type Sequence**:
+\
+__My research focuses on analyzing the class of Perrin-type primality tests- **Lucas-Type Sequence**__:
 
 ## [Lucas-Type Sequence](https://oeis.org/wiki/Lucas_sequences)
 Each primality test is a sequence with two parameters, $c_0$ and $c_1$, and initial condition $V_0$ and $V_1$, and the general form is:
