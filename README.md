@@ -15,12 +15,16 @@ $$V_{n+2} = c_1 V_{n+1} + c_0 V_{n}, \quad V_{0} = 2, \quad V_{1} = c_1$$
 
 If p is prime, then we have the congruence $$V_{p}\equiv V_{1}(mod\quad p)$$
 
-### Goal
+## Goal
 Understand prime numbers better and find ways to reduce number of pseudoprimes in probablistic primality tests.
 
-### Method 
+## Method 
 Visualize the quality of primality tests through **the number of pseudoprimes up to N** and **the sizes of the smallest pseudoproimes**.
 Analyze the extreme cases that stand out from the visulizations and try to find patterns among them.
 
-### Conclusion
+## Data
+The least promising case I found by looking at the number of pseudoprimes is the Lucas-type sequence (5, 2), which has 53 pseudoprimes up to 1,000. However, I found that this number can be reduced to 0 by restricting to 3-rough numbers. The best case I found is sequence (8, 6), which only has 4 pseudoprimes up to 1,000. It still has one pseudoprime after being restricted with 3-rough. This showcases that one primality test that initially looks worse than the other might actually be a better primality test after excluding pseudoprimes that are divisible by 2 or 3. I then generated more general graphs to compare primality tests after restricting to 3-rough pseudoprimes.
+
+
+## Conclusion
 A lot of pseudoprimes are divisible by 2 and 3, and thus we can improve the primality tests by adding a condition to restrict to 3 rough numbers after each primality test.
