@@ -1,4 +1,8 @@
 # Comparative Analysis of Primality Testing Algorithms
+
+![Primality Test Poster](primality_test_poster_and_abstract/primality_test_poster.png)
+[See the PDF](https://raw.githubusercontent.com/OssieLin/Comparative-Analysis-of-Primality-Testing-Algorithms/main/primality_test_poster_and_abstract/PrimalityTestPoster-StateDefined.pdf)
+
 ## Intro
 Modern cryptography algorithms like RSA need primality tests to generate large random primes.\
 Specifically, RSA uses the product of two prime numbers to generate the public and private keys; if these primes are predictable, it makes it easier for an attacker to break the encryption scheme.\
